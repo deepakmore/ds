@@ -82,6 +82,7 @@ class LinkedListOperationsTest {
 
         Assertions.assertEquals(3, LinkedListOperations.getTotalNodes());
         LinkedListOperations.print();
+        Assertions.assertEquals(20, LinkedListOperations.getFirstNodeValue());
 
     }
 
@@ -98,6 +99,17 @@ class LinkedListOperationsTest {
 
         Assertions.assertEquals(3, LinkedListOperations.getTotalNodes());
         LinkedListOperations.print();
+        Assertions.assertEquals(30, LinkedListOperations.getSpecificNodeValue(2));
+    }
 
+    @Test
+    void shouldPrintReverseList() {
+        LinkedListOperations.insertNodeAtLast(new SinglyLinkedListNode(10));
+        LinkedListOperations.insertNodeAtLast(new SinglyLinkedListNode(20));
+        LinkedListOperations.insertNodeAtLast(new SinglyLinkedListNode(30));
+        LinkedListOperations.insertNodeAtLast(new SinglyLinkedListNode(40));
+
+        LinkedListOperations.print();
+        LinkedListOperations.reversePrint();
     }
 }

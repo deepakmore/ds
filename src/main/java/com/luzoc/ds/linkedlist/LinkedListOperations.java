@@ -1,5 +1,7 @@
 package com.luzoc.ds.linkedlist;
 
+import java.util.Stack;
+
 public class LinkedListOperations {
     static SinglyLinkedListNode head = null;
 
@@ -67,10 +69,27 @@ public class LinkedListOperations {
     public static void print() {
         SinglyLinkedListNode node = head;
         while(node != null) {
-            System.out.println(node.data);
+            System.out.print(node.data + " ");
             node = node.next;
         }
     }
+
+    public static void reversePrint() {
+        SinglyLinkedListNode node = head;
+        Stack<Integer> stack = new Stack<>();
+
+        while(node != null) {
+            stack.push(node.data);
+            node = node.next;
+        }
+
+        System.out.println();
+        int size = stack.size();
+        for (int i = 0; i < size; i++) {
+            System.out.print(stack.pop() + " ");
+        }
+    }
+
 
     public static int getTotalNodes() {
         SinglyLinkedListNode node = head;
