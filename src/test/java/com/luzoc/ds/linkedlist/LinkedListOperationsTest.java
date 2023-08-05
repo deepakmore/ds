@@ -71,10 +71,7 @@ class LinkedListOperationsTest {
 
     @Test
     void shouldReturnIfFirstNodeDeleted() {
-        LinkedListOperations.insertNodeAtLast(new SinglyLinkedListNode(10));
-        LinkedListOperations.insertNodeAtLast(new SinglyLinkedListNode(20));
-        LinkedListOperations.insertNodeAtLast(new SinglyLinkedListNode(30));
-        LinkedListOperations.insertNodeAtLast(new SinglyLinkedListNode(40));
+        createAndSetDataInLinkedList();
 
         Assertions.assertEquals(4, LinkedListOperations.getTotalNodes());
 
@@ -88,10 +85,7 @@ class LinkedListOperationsTest {
 
     @Test
     void shouldReturnIfSpecificPositionNodeDeleted() {
-        LinkedListOperations.insertNodeAtLast(new SinglyLinkedListNode(10));
-        LinkedListOperations.insertNodeAtLast(new SinglyLinkedListNode(20));
-        LinkedListOperations.insertNodeAtLast(new SinglyLinkedListNode(30));
-        LinkedListOperations.insertNodeAtLast(new SinglyLinkedListNode(40));
+        createAndSetDataInLinkedList();
 
         Assertions.assertEquals(4, LinkedListOperations.getTotalNodes());
 
@@ -104,12 +98,48 @@ class LinkedListOperationsTest {
 
     @Test
     void shouldPrintReverseList() {
+        createAndSetDataInLinkedList();
+
+        LinkedListOperations.print();
+        LinkedListOperations.reversePrint();
+    }
+
+    @Test
+    void shouldReturnHeadIfListContainsSingleElementForReverseList() {
+        LinkedListOperations.insertNodeAtLast(new SinglyLinkedListNode(10));
+        LinkedListOperations.reverseList();
+
+        Assertions.assertEquals(1, LinkedListOperations.getTotalNodes());
+        Assertions.assertEquals(10, LinkedListOperations.getFirstNodeValue());
+    }
+
+    @Test
+    void shouldReturnReverseList() {
+        createAndSetDataInLinkedList();
+
+        LinkedListOperations.reverseList();
+
+        Assertions.assertEquals(4, LinkedListOperations.getTotalNodes());
+        Assertions.assertEquals(40, LinkedListOperations.getFirstNodeValue());
+        Assertions.assertEquals(10, LinkedListOperations.getLastNodeValue());
+    }
+
+    @Test
+    void shouldCompareTwoLinkedList() {
+        createAndSetDataInLinkedList();
+    }
+
+    private void createAndSetDataInLinkedList() {
         LinkedListOperations.insertNodeAtLast(new SinglyLinkedListNode(10));
         LinkedListOperations.insertNodeAtLast(new SinglyLinkedListNode(20));
         LinkedListOperations.insertNodeAtLast(new SinglyLinkedListNode(30));
         LinkedListOperations.insertNodeAtLast(new SinglyLinkedListNode(40));
+    }
 
-        LinkedListOperations.print();
-        LinkedListOperations.reversePrint();
+    private void createAndSetDataInLinkedList2() {
+        LinkedListOperations.insertNodeAtLast(new SinglyLinkedListNode(10));
+        LinkedListOperations.insertNodeAtLast(new SinglyLinkedListNode(20));
+        LinkedListOperations.insertNodeAtLast(new SinglyLinkedListNode(30));
+        LinkedListOperations.insertNodeAtLast(new SinglyLinkedListNode(50));
     }
 }
