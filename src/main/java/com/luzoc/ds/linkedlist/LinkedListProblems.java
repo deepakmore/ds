@@ -1,6 +1,7 @@
 package com.luzoc.ds.linkedlist;
 
 import java.util.List;
+import java.util.Objects;
 
 public class LinkedListProblems {
 
@@ -26,7 +27,7 @@ public class LinkedListProblems {
 
     public static Integer getValueOnSpecificLocation(SinglyLinkedListNode head, int position) {
         SinglyLinkedListNode node = head;
-        int counter = 1;
+        int counter = 0;
         while(node != null) {
             if(counter == position) {
                 return node.data;
@@ -44,5 +45,46 @@ public class LinkedListProblems {
             head2 = head2.next;
         }
         return (head1 == head2);
+    }
+
+    public static SinglyLinkedListNode reverseLinkedList(SinglyLinkedListNode head) {
+        SinglyLinkedListNode cur = head;
+        SinglyLinkedListNode prev = null;
+
+        while (cur != null) {
+            SinglyLinkedListNode temp = cur.next;
+
+            cur.next = prev;
+            prev = cur;
+            cur = temp;
+        }
+
+        return prev;
+    }
+
+    public static SinglyLinkedListNode removeDuplicatesFromSortedLinkedList(SinglyLinkedListNode head) {
+        if(head == null || head.next == null) return head;
+
+        SinglyLinkedListNode cur = head.next;
+        SinglyLinkedListNode prev = head;
+
+        while(cur != null) {
+            if (prev.data != cur.data) {
+                prev.next = cur;
+                prev = cur;
+            }
+            cur = cur.next;
+        }
+        prev.next = null;
+        return head;
+    }
+
+    public static int getTotalNodes(SinglyLinkedListNode head) {
+        int counter = 0;
+        while (head != null) {
+            counter ++;
+            head = head.next;
+        }
+        return counter;
     }
 }
