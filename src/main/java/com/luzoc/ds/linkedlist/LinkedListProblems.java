@@ -87,4 +87,18 @@ public class LinkedListProblems {
         }
         return counter;
     }
+
+    public static Boolean identifyCyclicLinkedList(SinglyLinkedListNode head) {
+
+        SinglyLinkedListNode cur = head;
+        SinglyLinkedListNode forward = head;
+
+        while (forward != null && forward.next != null) {
+            cur = cur.next;
+            forward = forward.next.next;
+            if(cur == forward) return true;
+        }
+
+        return false;
+    }
 }

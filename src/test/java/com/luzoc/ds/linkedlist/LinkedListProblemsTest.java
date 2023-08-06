@@ -12,7 +12,7 @@ class LinkedListProblemsTest {
     void shouldInsertRecords() {
         SinglyLinkedListNode head = LinkedListProblems.insertNode(Lists.list(10, 20, 30, 40, 50));
         LinkedListProblems.print(head);
-        Assertions.assertEquals(30, LinkedListProblems.getValueOnSpecificLocation(head, 3));
+        Assertions.assertEquals(30, LinkedListProblems.getValueOnSpecificLocation(head, 2));
     }
 
     @Test
@@ -42,6 +42,35 @@ class LinkedListProblemsTest {
 
         LinkedListProblems.print(newHead);
         Assertions.assertEquals(5, LinkedListProblems.getTotalNodes(newHead));
+    }
 
+    @Test
+    void shouldReturnFalseIfLinkedListIsNotCyclic() {
+        SinglyLinkedListNode head = LinkedListProblems.insertNode(Lists.list(10, 20, 30, 40, 50));
+        Boolean isCyclic = LinkedListProblems.identifyCyclicLinkedList(head);
+
+        Assertions.assertFalse(isCyclic);
+    }
+
+    @Test
+    void shouldReturnTrueIfLinkedListIsCyclic() {
+        SinglyLinkedListNode head = createAndGetCyclicLinkedList();
+        Boolean isCyclic = LinkedListProblems.identifyCyclicLinkedList(head);
+
+        Assertions.assertTrue(isCyclic);
+    }
+
+    SinglyLinkedListNode createAndGetCyclicLinkedList() {
+        SinglyLinkedListNode head = LinkedListProblems.insertNode(Lists.list(10, 20, 30, 40, 50));
+        SinglyLinkedListNode cur = head;
+        SinglyLinkedListNode temp = head.next.next;
+        do {
+            if (cur.next == null) {
+                cur.next = temp;
+                break;
+            }
+            cur = cur.next;
+        } while (true);
+        return head;
     }
 }
