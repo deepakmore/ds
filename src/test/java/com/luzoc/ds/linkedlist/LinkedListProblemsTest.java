@@ -1,5 +1,6 @@
 package com.luzoc.ds.linkedlist;
 
+import net.bytebuddy.dynamic.scaffold.MethodGraph;
 import org.assertj.core.util.Lists;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -36,7 +37,7 @@ class LinkedListProblemsTest {
     }
 
     @Test
-    void shouldRemoveDuplicateValuesFromTheAscendingLinkedList() {
+    void shouldRemoveDuplicateValuesFromSortedLinkedList() {
         SinglyLinkedListNode head = LinkedListProblems.insertNode(Lists.list(10, 10, 20, 20, 20, 30, 30, 30, 30, 30, 40, 50, 50));
         SinglyLinkedListNode newHead = LinkedListProblems.removeDuplicatesFromSortedLinkedList(head);
 
@@ -58,6 +59,43 @@ class LinkedListProblemsTest {
         Boolean isCyclic = LinkedListProblems.identifyCyclicLinkedList(head);
 
         Assertions.assertTrue(isCyclic);
+    }
+
+    @Test
+    void shouldFindMergingPoint() {
+        SinglyLinkedListNode head = LinkedListProblems.insertNode(Lists.list(10, 20, 30, 40, 50));
+        SinglyLinkedListNode head2 = createAndGetMergingLinkedList(head);
+
+        Integer value = LinkedListProblems.getMergingPointInTwoLinkedList(head, head2);
+
+        Assertions.assertEquals(30, value);
+    }
+
+    @Test
+    void shouldReturnNullIfThereIsNoMergingNode() {
+        SinglyLinkedListNode head = LinkedListProblems.insertNode(Lists.list(10, 20, 30, 40, 50));
+        SinglyLinkedListNode head2 = LinkedListProblems.insertNode(Lists.list(10, 20, 30, 40, 50));
+
+        Integer mergingPointInTwoLinkedList = LinkedListProblems.getMergingPointInTwoLinkedList(head, head2);
+
+        Assertions.assertNull(mergingPointInTwoLinkedList);
+    }
+
+    @Test
+    void shouldReturnFilledLinkedListInCaseOfEmptyList() {
+        SinglyLinkedListNode head = LinkedListProblems.insertNode(Lists.list(10, 20, 30, 40, 50));
+        SinglyLinkedListNode newHead = LinkedListProblems.mergeTwoSortedLinkedList(head, null);
+        Assertions.assertEquals(newHead, head);
+
+        SinglyLinkedListNode head2 =  LinkedListProblems.insertNode(Lists.list(1, 2, 3, 35, 45));
+        newHead = LinkedListProblems.mergeTwoSortedLinkedList(null, head2);
+        Assertions.assertEquals(newHead, head2);
+    }
+
+    private SinglyLinkedListNode createAndGetMergingLinkedList(SinglyLinkedListNode head) {
+        SinglyLinkedListNode head2 = LinkedListProblems.insertNode(Lists.list(90, 100));
+        head2.next.next = head.next.next;
+        return head2;
     }
 
     SinglyLinkedListNode createAndGetCyclicLinkedList() {
